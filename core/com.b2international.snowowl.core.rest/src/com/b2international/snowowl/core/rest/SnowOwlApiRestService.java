@@ -17,45 +17,41 @@ package com.b2international.snowowl.core.rest;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.b2international.snowowl.core.domain.CollectionResource;
-import com.google.common.collect.ImmutableMap;
 
-import springfox.documentation.annotations.ApiIgnore;
-import springfox.documentation.service.Documentation;
-import springfox.documentation.spring.web.DocumentationCache;
+import io.swagger.v3.oas.annotations.Hidden;
 
 /**
  * @since 7.3
  */
-@ApiIgnore
+@Hidden
 @RestController
 @RequestMapping(value = "/apis", produces = { AbstractRestService.JSON_MEDIA_TYPE })
 public class SnowOwlApiRestService extends AbstractRestService {
 
-	@Autowired
-	private DocumentationCache documentCache;
+//	@Autowired
+//	private DocumentationCache documentCache;
 	
 	@GetMapping
 	public CollectionResource<Map<String, Object>> get() {
-		List<Map<String, Object>> items = documentCache.all().values().stream()
-				.sorted((d1, d2) -> d1.getResourceListing().getInfo().getTitle().compareTo(d2.getResourceListing().getInfo().getTitle()))
-				.map(this::toApiDoc)
-				.collect(Collectors.toList());
-		return CollectionResource.of(items);
+//		List<Map<String, Object>> items = Collections.emptyList().stream()
+//				.sorted((d1, d2) -> d1.getResourceListing().getInfo().getTitle().compareTo(d2.getResourceListing().getInfo().getTitle()))
+//				.map(this::toApiDoc)
+//				.collect(Collectors.toList());
+		return CollectionResource.of(List.of());
+		
 	}
 	
-	private Map<String, Object> toApiDoc(Documentation doc) {
-		return ImmutableMap.of(
-			"id", doc.getGroupName(),
-			"title", doc.getResourceListing().getInfo().getTitle()
-		);
-	}
+//	private Map<String, Object> toApiDoc(Documentation doc) {
+//		return ImmutableMap.of(
+//			"id", doc.getGroupName(),
+//			"title", doc.getResourceListing().getInfo().getTitle()
+//		);
+//	}
 	
 }

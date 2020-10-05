@@ -36,6 +36,7 @@
         <setEntry value="com.fasterxml.jackson.dataformat.jackson-dataformat-smile@default:default"/>
         <setEntry value="com.fasterxml.jackson.dataformat.jackson-dataformat-xml@default:default"/>
         <setEntry value="com.fasterxml.jackson.dataformat.jackson-dataformat-yaml@default:default"/>
+        <setEntry value="com.fasterxml.jackson.datatype.jackson-datatype-jsr310@default:default"/>
         <setEntry value="com.fasterxml.jackson.module.jackson-module-afterburner@default:default"/>
         <setEntry value="com.fasterxml.jackson.module.jackson-module-jaxb-annotations@default:default"/>
         <setEntry value="com.fasterxml.woodstox.woodstox-core@default:default"/>
@@ -55,15 +56,16 @@
         <setEntry value="io.netty.resolver@default:default"/>
         <setEntry value="io.netty.transport@default:default"/>
         <setEntry value="io.reactivex.rxjava2.rxjava@default:default"/>
-        <setEntry value="io.swagger.annotations@default:default"/>
         <setEntry value="io.swagger.core.v3.swagger-annotations@default:default"/>
+        <setEntry value="io.swagger.core.v3.swagger-core@default:default"/>
+        <setEntry value="io.swagger.core.v3.swagger-integration@default:default"/>
         <setEntry value="io.swagger.core.v3.swagger-models@default:default"/>
-        <setEntry value="io.swagger.models@default:default"/>
         <setEntry value="it.unimi.dsi.fastutil@default:default"/>
         <setEntry value="javax.activation-api@default:default"/>
         <setEntry value="javax.el@default:default"/>
         <setEntry value="javax.inject@default:default"/>
         <setEntry value="javax.servlet@default:default"/>
+        <setEntry value="javax.validation.api@default:default"/>
         <setEntry value="jaxb-api@default:default"/>
         <setEntry value="jcl.over.slf4j@default:default"/>
         <setEntry value="jul.to.slf4j@default:default"/>
@@ -75,6 +77,7 @@
         <setEntry value="org.antlr.runtime@default:default"/>
         <setEntry value="org.apache.commons.codec@default:default"/>
         <setEntry value="org.apache.commons.io@default:default"/>
+        <setEntry value="org.apache.commons.lang3*3.7.0@default:default"/>
         <setEntry value="org.apache.felix.gogo.command@default:default"/>
         <setEntry value="org.apache.felix.gogo.runtime@default:default"/>
         <setEntry value="org.apache.felix.gogo.shell@default:default"/>

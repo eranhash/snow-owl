@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 B2i Healthcare Pte Ltd, http://b2i.sg
+ * Copyright 2019-2020 B2i Healthcare Pte Ltd, http://b2i.sg
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package com.b2international.snowowl.core.rest;
 
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @since 7.2
@@ -32,9 +31,9 @@ public class CoreApiConfig extends BaseApiConfig {
 	}
 	
 	@Bean
-	public Docket coreDocs() {
+	public GroupedOpenApi coreDocs() {
 		return docs(
-			getApiBaseUrl(),
+			getApiBaseUrl(), 
 			"admin",
 			"1.0",
 			"Admin API",

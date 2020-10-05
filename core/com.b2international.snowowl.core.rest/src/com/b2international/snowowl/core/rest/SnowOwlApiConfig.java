@@ -85,16 +85,14 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Provider;
 
 import io.micrometer.core.instrument.MeterRegistry;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * The Spring configuration class for Snow Owl's internal REST services module.
  *
  * @since 1.0
  */
-@EnableOpenApi
 @Configuration
-@ComponentScan({"com.b2international.snowowl.core.rest"})
+@ComponentScan({"com.b2international.snowowl.core.rest", "org.springdoc"})
 @Import({ SnowOwlSecurityConfig.class })
 @PropertySource("classpath:com/b2international/snowowl/core/rest/service_configuration.properties")
 public class SnowOwlApiConfig extends WebMvcConfigurationSupport {

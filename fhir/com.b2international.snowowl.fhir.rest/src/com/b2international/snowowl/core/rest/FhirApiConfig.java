@@ -15,11 +15,10 @@
  */
 package com.b2international.snowowl.core.rest;
 
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * The Spring configuration class for Snow Owl's FHIR REST API.
@@ -36,7 +35,7 @@ public class FhirApiConfig extends BaseApiConfig {
 	}
 
 	@Bean
-	public Docket fhirDocs() {
+	public GroupedOpenApi fhirDocs() {
 		return docs(
 			getApiBaseUrl(), 
 			"fhir", 

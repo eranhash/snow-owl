@@ -40,12 +40,12 @@ import com.b2international.snowowl.core.date.Dates;
 import com.b2international.snowowl.core.rest.AbstractRestService;
 import com.b2international.snowowl.core.rest.codesystem.CodeSystemVersionRestService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * RESTful service that exposes the content provisioning capabilities of the Snow Owl server
@@ -53,7 +53,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * 
  * @since 7.0
  */
-@ApiIgnore
+@Hidden
 @Tag(name = "exchange", description = "Exchange")
 @Controller
 @RequestMapping(

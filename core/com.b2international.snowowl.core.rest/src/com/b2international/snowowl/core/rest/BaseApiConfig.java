@@ -15,7 +15,7 @@
  */
 package com.b2international.snowowl.core.rest;
 
-import static springfox.documentation.schema.AlternateTypeRules.newRule;
+//import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 import java.security.Principal;
 import java.util.Collections;
@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -37,19 +39,24 @@ import com.b2international.snowowl.core.uri.CodeSystemURI;
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.collect.ImmutableList;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityScheme.In;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.schema.WildcardType;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.BasicAuth;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.SecurityReference;
-import springfox.documentation.service.SecurityScheme;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spi.service.contexts.SecurityContext;
-import springfox.documentation.spring.web.plugins.Docket;
+//import springfox.documentation.builders.PathSelectors;
+//import springfox.documentation.schema.WildcardType;
+//import springfox.documentation.service.ApiInfo;
+//import springfox.documentation.service.ApiKey;
+//import springfox.documentation.service.AuthorizationScope;
+//import springfox.documentation.service.BasicAuth;
+//import springfox.documentation.service.Contact;
+//import springfox.documentation.service.SecurityReference;
+//import springfox.documentation.service.SecurityScheme;
+//import springfox.documentation.spi.DocumentationType;
+//import springfox.documentation.spi.service.contexts.SecurityContext;
+//import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * Abstract configuration superclass to aid in providing Swagger documentation
@@ -95,62 +102,69 @@ public abstract class BaseApiConfig {
 	 * 
 	 * @return a configured docket for this API module
 	 */
-	protected final Docket docs(
-			final String apiBaseUrl,
+	protected final GroupedOpenApi docs(
+			final String apiBaseUrl, 
 			final String apiGroup,
 			final String apiVersion,
-			final String apiTitle,
-			final String apiTermsOfServiceUrl,
-			final String apiContact,
-			final String apiLicense,
-			final String apiLicenseUrl,
-			final String apiDescription) {
-		final TypeResolver resolver = new TypeResolver();
-		final Predicate<String> paths = PathSelectors.regex(servletContextPath + apiBaseUrl + ".*");
-		return new Docket(DocumentationType.OAS_30)
-				.securitySchemes(ImmutableList.<SecurityScheme>of(
-					new BasicAuth("basic"),
-					new ApiKey("bearer", HttpHeaders.AUTHORIZATION, In.HEADER.name())
-				))
-				.securityContexts(ImmutableList.of(
-					SecurityContext.builder()
-						.forPaths(paths)
-						.securityReferences(ImmutableList.of(
-							new SecurityReference("basic", new AuthorizationScope[0]),
-							new SecurityReference("bearer", new AuthorizationScope[0])
-						))
-					.build()
-				))
-				.useDefaultResponseMessages(false)
-				.ignoredParameterTypes(Principal.class)
-				.alternateTypeRules(
-					newRule(resolver.resolve(UUID.class), resolver.resolve(String.class)),
-					newRule(resolver.resolve(CodeSystemURI.class), resolver.resolve(String.class)),
-					newRule(resolver.resolve(ExtendedLocale.class), resolver.resolve(String.class)),
-					newRule(
-						resolver.resolve(List.class, resolver.resolve(CodeSystemURI.class)),
-						resolver.resolve(List.class, resolver.resolve(String.class))
-			        ),
-					newRule(
-						resolver.resolve(List.class, resolver.resolve(ExtendedLocale.class)),
-						resolver.resolve(List.class, resolver.resolve(String.class))
-			        ),
-					newRule(
-						resolver.resolve(Promise.class, WildcardType.class),
-			            resolver.resolve(WildcardType.class)
-			        ),
-					newRule(
-						resolver.resolve(Promise.class, resolver.resolve(ResponseEntity.class, WildcardType.class)),
-			            resolver.resolve(WildcardType.class)
-			        )
-				)
-				.groupName(apiGroup)
-	            .select()
-	            	.paths(paths)
-	            	.build()
-	            .apiInfo(new ApiInfo(apiTitle, apiDescription, apiVersion, apiTermsOfServiceUrl, new Contact(getOrganization(), apiLicenseUrl, apiContact), apiLicense, apiLicenseUrl, Collections.emptyList()));
+    		final String apiTitle,
+    		final String apiTermsOfServiceUrl,
+    		final String apiContact,
+    		final String apiLicense,
+    		final String apiLicenseUrl,
+    		final String apiDescription) {
+//		final TypeResolver resolver = new TypeResolver();
+//		final Predicate<String> paths = PathSelectors.regex();
+//		return new Docket(DocumentationType.OAS_30)
+//				.securitySchemes(ImmutableList.<SecurityScheme>of(
+//					new BasicAuth("basic"),
+//					new ApiKey("bearer", HttpHeaders.AUTHORIZATION, In.HEADER.name())
+//				))
+//				.securityContexts(ImmutableList.of(
+//					SecurityContext.builder()
+//						.forPaths(paths)
+//						.securityReferences(ImmutableList.of(
+//							new SecurityReference("basic", new AuthorizationScope[0]),
+//							new SecurityReference("bearer", new AuthorizationScope[0])
+//						))
+//					.build()
+//				))
+//				.useDefaultResponseMessages(false)
+//				.ignoredParameterTypes(Principal.class)
+//				.alternateTypeRules(
+//					newRule(resolver.resolve(UUID.class), resolver.resolve(String.class)),
+//					newRule(resolver.resolve(CodeSystemURI.class), resolver.resolve(String.class)),
+//					newRule(resolver.resolve(ExtendedLocale.class), resolver.resolve(String.class)),
+//					newRule(
+//						resolver.resolve(List.class, resolver.resolve(CodeSystemURI.class)),
+//						resolver.resolve(List.class, resolver.resolve(String.class))
+//			        ),
+//					newRule(
+//						resolver.resolve(List.class, resolver.resolve(ExtendedLocale.class)),
+//						resolver.resolve(List.class, resolver.resolve(String.class))
+//			        ),
+//					newRule(
+//						resolver.resolve(Promise.class, WildcardType.class),
+//			            resolver.resolve(WildcardType.class)
+//			        ),
+//					newRule(
+//						resolver.resolve(Promise.class, resolver.resolve(ResponseEntity.class, WildcardType.class)),
+//			            resolver.resolve(WildcardType.class)
+//			        )
+//				)
+//	            .apiInfo(new ApiInfo(apiTitle, apiDescription, apiVersion, apiTermsOfServiceUrl, new Contact(getOrganization(), apiLicenseUrl, apiContact), apiLicense, apiLicenseUrl, Collections.emptyList()));
+		return GroupedOpenApi.builder()
+	        .group(apiGroup)
+	        .pathsToMatch(servletContextPath + apiBaseUrl + ".*")
+	        .addOpenApiCustomiser(apiInfo -> {
+	        	apiInfo.info(new Info().title(apiTitle)
+                    .description(apiDescription)
+                    .version(apiVersion)
+                    .contact(new Contact().email(apiContact).url(apiLicenseUrl).name(getOrganization()))
+                    .license(new License().name(apiLicense).url(apiLicenseUrl)));
+	        })
+	        .build();
 	}
-
+	
 	/**
 	 * Subclasses may override the default organization 
 	 * @return

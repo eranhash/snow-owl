@@ -15,11 +15,10 @@
  */
 package com.b2international.snowowl.core.rest;
 
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @since 6.18
@@ -34,7 +33,7 @@ public class SnomedCisApiConfig extends BaseApiConfig {
 	}
 
 	@Bean
-	public Docket cisDocs() {
+	public GroupedOpenApi cisDocs() {
 		return docs(
 			getApiBaseUrl(), 
 			"cis", 
