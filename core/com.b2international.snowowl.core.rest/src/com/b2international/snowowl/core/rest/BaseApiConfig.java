@@ -77,9 +77,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme.In;
  */
 public abstract class BaseApiConfig {
 
-	@Value("#{servletContext.contextPath}")
-    private String servletContextPath;
-	
 	/**
 	 * @return the api base url for all services grouped by this configuration class
 	 */
@@ -154,7 +151,7 @@ public abstract class BaseApiConfig {
 //	            .apiInfo(new ApiInfo(apiTitle, apiDescription, apiVersion, apiTermsOfServiceUrl, new Contact(getOrganization(), apiLicenseUrl, apiContact), apiLicense, apiLicenseUrl, Collections.emptyList()));
 		return GroupedOpenApi.builder()
 	        .group(apiGroup)
-	        .pathsToMatch(servletContextPath + apiBaseUrl + ".*")
+	        .pathsToMatch(apiBaseUrl + "/**")
 	        .addOpenApiCustomiser(apiInfo -> {
 	        	apiInfo.info(new Info().title(apiTitle)
                     .description(apiDescription)

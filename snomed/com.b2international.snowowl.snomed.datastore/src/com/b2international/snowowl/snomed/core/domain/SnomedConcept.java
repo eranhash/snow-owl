@@ -185,6 +185,7 @@ public final class SnomedConcept extends SnomedCoreComponent {
 	private SnomedDescriptions preferredDescriptions;
 	private SnomedRelationships relationships;
 	private SnomedRelationships inboundRelationships;
+	
 	private SnomedConcepts ancestors;
 	private SnomedConcepts descendants;
 	private SnomedConcepts statedAncestors;
