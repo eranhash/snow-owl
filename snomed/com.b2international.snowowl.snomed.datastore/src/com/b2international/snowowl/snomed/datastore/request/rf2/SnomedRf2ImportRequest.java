@@ -96,6 +96,9 @@ final class SnomedRf2ImportRequest implements Request<BranchContext, Rf2ImportRe
 	
 	@JsonProperty
 	private boolean createVersions = true;
+	
+	@JsonProperty
+	private boolean dryRun = false;
 
 	SnomedRf2ImportRequest(UUID rf2ArchiveId) {
 		this.rf2ArchiveId = rf2ArchiveId;
@@ -107,6 +110,10 @@ final class SnomedRf2ImportRequest implements Request<BranchContext, Rf2ImportRe
 	
 	void setCreateVersions(boolean createVersions) {
 		this.createVersions = createVersions;
+	}
+	
+	void setDryRun(boolean dryRun) {
+		this.dryRun = dryRun;
 	}
 	
 	@Override
@@ -175,13 +182,16 @@ final class SnomedRf2ImportRequest implements Request<BranchContext, Rf2ImportRe
 				return response;
 			}
 			
-			// Import effective time slices in chronological order
-			for (Rf2EffectiveTimeSlice slice : orderedEffectiveTimeSlices) {
-				slice.doImport(context, codeSystem, importconfig);
+			// if not a dryRun, perform import
+			if (!dryRun) {
+				// Import effective time slices in chronological order
+				for (Rf2EffectiveTimeSlice slice : orderedEffectiveTimeSlices) {
+					slice.doImport(context, codeSystem, importconfig);
+				}
+					
+			    // Update locales registered on the code system
+				updateLocales(context, codeSystem);
 			}
-			
-			// Update locales registered on the code system
-			updateLocales(context, codeSystem);
 		}
 		
 		return response;
